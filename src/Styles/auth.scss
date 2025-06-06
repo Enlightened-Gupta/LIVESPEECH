@@ -1,0 +1,153 @@
+body, html, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.auth-bg {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #a259ff 0%, #6e45e2 50%, #fff 100%);
+  padding: 3rem 0;
+}
+
+.auth-card {
+  background: #fff;
+  padding: 2.5rem 2.25rem 2rem 2.25rem;
+  border-radius: 22px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+  width: 100%;
+  max-width: 400px;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.auth-title {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  color: #161848;
+  margin-bottom: 2rem;
+  letter-spacing: 0.01em;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem; // <--- Controls space between all inputs!
+}
+
+.auth-form-row {
+  display: flex;
+  gap: 0.75rem;
+}
+.auth-footer{
+  margin-top: 10px;
+}
+
+.auth-form-row input {
+  flex: 1;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background: #f6f8fb;
+  font-size: 1rem;
+  box-sizing: border-box;
+  margin-bottom: 0;
+  border: 1.5px solid #e3e6ea;
+  transition: border-color 0.18s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border: 1.5px solid #2c7be5;
+  background: #fff;
+}
+
+input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
+
+.auth-checkbox-label {
+  font-size: 0.93rem;
+  color: #333;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: flex-start;
+}
+
+.auth-btn {
+  width: 100%;
+  padding: 0.9rem 0;
+  background: linear-gradient(90deg, #4d8eff 0%, #38e6cb 100%);
+  color: #fff;
+  font-size: 1.12rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  transition: opacity 0.2s, background 0.18s;
+}
+
+.auth-btn:disabled {
+  opacity: 0.7;
+}
+
+.auth-link-row {
+  text-align: center;
+  margin-top: 1.2rem;
+  width: 100%;
+}
+
+.auth-link-row a {
+  color: #2c7be5;
+  text-decoration: none;
+  margin-left: 0.25rem;
+  font-weight: 500;
+}
+
+.auth-link-row a:hover {
+  text-decoration: underline;
+}
+
+.auth-forgot-link {
+  display: block;
+  text-align: right;
+  font-size: 0.95rem;
+  margin-bottom: 0.6rem;
+  color: #2c7be5;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-forgot-link:hover {
+  text-decoration: underline;
+}
+.plan-option-row {
+  border: 1.3px solid #e6eaf0;
+  background: #fff;
+  margin-bottom: 10px;
+  transition: background 0.18s;
+  cursor: pointer;
+}
+.plan-option-row.selected {
+  background: #f0fbff;
+  border: 1.5px solid #2c7be5;
+}
+.plan-option-row input[type="radio"] {
+  accent-color: #2c7be5;
+  margin-top: 2px;
+}

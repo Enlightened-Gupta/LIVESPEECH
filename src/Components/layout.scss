@@ -1,0 +1,128 @@
+.main-bg {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #a259ff 0%, #6e45e2 50%, #fff 100%);
+    position: relative;
+    overflow-x: hidden;
+  }
+  
+  .funky-waves {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 280px;
+    background: url("https://svgshare.com/i/133X.svg") repeat-x;
+    opacity: 0.20;
+    z-index: 1;
+    animation: waveMove 18s linear infinite;
+  }
+  
+  @keyframes waveMove {
+    0% { background-position-x: 0; }
+    100% { background-position-x: 1400px; }
+  }
+  
+  .funky-navbar {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #232ed1;
+    padding: 0.75rem 2rem;
+    box-shadow: 0 4px 16px 0 rgba(85, 45, 180, 0.08);
+  }
+  
+  .funky-logo {
+    height: 80px;         // Bigger logo
+    width: 80px; 
+    border-radius: 12px;
+    box-shadow: 0 1px 12px rgba(162, 89, 255, 0.13);
+    background: #fff;
+    cursor: pointer;
+  }
+  .nav-center-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1.2px;
+    text-shadow: 0 2px 12px rgba(162, 89, 255, 0.23);
+    z-index: 2;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    font-size: 1.09rem;
+  }
+  
+  .nav-links a {
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s, background 0.2s;
+    border-radius: 7px;
+    padding: 0.3rem 1.05rem;
+  }
+  
+  .nav-links a:hover, .nav-links .nav-btn:hover {
+    color: #232ed1;
+    background: #fff;
+    box-shadow: 0 2px 8px #38f9d7a9;
+  }
+  
+  .nav-btn {
+    background: linear-gradient(90deg, #a259ff, #38f9d7);
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    margin-left: 1rem;
+    padding: 0.4rem 1.25rem;
+    cursor: pointer;
+    transition: background 0.25s;
+  }
+  
+  .page-content {
+    position: relative;
+    z-index: 2;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Optionally, tweak cards on top of this bg */
+  .card, .auth-card, .main-card {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 24px 0 rgba(85,45,180,0.11);
+    padding: 2rem 2.5rem 1.7rem 2.5rem;
+    margin: 2rem 0;
+    max-width: 450px;
+    width: 100%;
+  }
+  
+  @media (max-width: 600px) {
+    .funky-navbar {
+      flex-direction: column;
+      height: auto;
+      padding: 1rem;
+      gap: 1.2rem;
+    }
+    .funky-logo {
+      height: 42px;
+      margin-bottom: 1rem;
+    }
+    .card, .auth-card, .main-card {
+      padding: 1.2rem 0.7rem;
+      margin: 1rem 0;
+    }
+  }
+  
