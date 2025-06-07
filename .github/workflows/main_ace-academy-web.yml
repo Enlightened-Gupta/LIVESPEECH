@@ -1,7 +1,4 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: Build and deploy ASP app to Azure Web App - ace-academy-web
+name: Build and deploy React app to Azure Web App - ace-academy-web
 
 on:
   push:
@@ -10,60 +7,34 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: windows-latest
-    permissions:
-      contents: read #This is required for actions/checkout
+  build-and-deploy:
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup MSBuild path
-        uses: microsoft/setup-msbuild@v1.0.2
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
 
-      - name: Setup NuGet
-        uses: NuGet/setup-nuget@v1.0.5
+      - name: Install dependencies
+        run: npm install
+        working-directory: LIVESPEECH/livespeech-react
 
-      - name: Restore NuGet packages
-        run: nuget restore
+      - name: Build React app
+        run: npm run build
+        working-directory: LIVESPEECH/livespeech-react
 
-      - name: Publish to folder
-        run: msbuild /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="\published\"
-
-      - name: Upload artifact for deployment job
+      - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ASP-app
-          path: '/published/**'
-
-  deploy:
-    runs-on: windows-latest
-    needs: build
-    environment:
-      name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    permissions:
-      id-token: write #This is required for requesting the JWT
-      contents: read #This is required for actions/checkout
-
-    steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v4
-        with:
-          name: ASP-app
-      
-      - name: Login to Azure
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_A777A589FC3D4B17B46DEE94B2CD08B5 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_A33D37990615438EA89FFFBD7C806E7C }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_FB989728F846408EAE0C9CC7E169B568 }}
+          name: react-build
+          path: LIVESPEECH/livespeech-react/build
 
       - name: Deploy to Azure Web App
-        id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'ace-academy-web'
-          slot-name: 'Production'
-          package: .
-          
+          app-name: 'ace-academy-web'             # Your Azure Web App name
+          package: LIVESPEECH/livespeech-react/build
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_ACE_ACADEMY_WEB }}
