@@ -3,8 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import Login from "./pages/login";
 import Register from "./pages/Register";
 import ForgetPassword from "./pages/ForgetPassword";
-import ProtectedRoute from "./Components/ProtectedRoute";
-import Live from "./pages/Live"; // Dummy page
+import Live from "./pages/Live"; 
 import "./Styles/auth.scss";
 import Subscription from "./pages/Subscription";
 import About from "./pages/About";
