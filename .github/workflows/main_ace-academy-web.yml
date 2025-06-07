@@ -11,30 +11,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
           node-version: '18'
 
       - name: Install dependencies
         run: npm install
-        working-directory: livespeech-react
+        working-directory: LIVESPEECH/livespeech-react
 
       - name: Build React app
         run: npm run build
-        working-directory: livespeech-react
-
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: react-build
-          path: livespeech-react/build
+        working-directory: LIVESPEECH/livespeech-react
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'ace-academy-web'             # Your Azure Web App name
-          package: livespeech-react/build
+          app-name: 'ace-academy-web'
+          package: LIVESPEECH/livespeech-react/build
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_ACE_ACADEMY_WEB }}
