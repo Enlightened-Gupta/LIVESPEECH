@@ -30,11 +30,11 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: react-build
-          path: livespeech-react/build
+          path: /livespeech-react/build
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'ace-academy-web'             # Your Azure Web App name
-          package: livespeech-react/build
+          package: /livespeech-react/build
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_ACE_ACADEMY_WEB }}
