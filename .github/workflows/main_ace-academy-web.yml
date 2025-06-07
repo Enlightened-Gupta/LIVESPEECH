@@ -9,9 +9,6 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: livespeech-react
 
     steps:
       - name: Checkout repository
@@ -24,14 +21,16 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+        working-directory: livespeech-react
 
       - name: Build app
         run: npm run build
+        working-directory: livespeech-react
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'ace-academy-web'
           slot-name: 'Production'
-          package: build
+          package: livespeech-react/build
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_ACE_ACADEMY_WEB }}
