@@ -1,3 +1,5 @@
+# .github/workflows/main_ace-academy-web.yml
+
 name: Build and deploy React app to Azure Web App - ace-academy-web
 
 on:
@@ -10,26 +12,36 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: LIVESPEECH/livespeech-react
+
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Use Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '18' # Or 20 if your app uses it
 
       - name: Install dependencies
-        run: npm install
-        working-directory: LIVESPEECH/livespeech-react
+        run: npm ci
 
-      - name: Build React app
+      - name: Build production
         run: npm run build
-        working-directory: LIVESPEECH/livespeech-react
 
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: LIVESPEECH/livespeech-react/build
+
+      # Download and deploy in the same job
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'ace-academy-web'
+          app-name: 'ace-academy-web'           # <-- Your Azure Web App name
+          slot-name: 'Production'
           package: LIVESPEECH/livespeech-react/build
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_ACE_ACADEMY_WEB }}
