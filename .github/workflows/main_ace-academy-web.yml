@@ -20,21 +20,21 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: LIVESPEECH/livespeech-react
+        working-directory: livespeech-react
 
       - name: Build React app
         run: npm run build
-        working-directory: LIVESPEECH/livespeech-react
+        working-directory: livespeech-react
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: react-build
-          path: LIVESPEECH/livespeech-react/build
+          path: livespeech-react/build
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'ace-academy-web'             # Your Azure Web App name
-          package: LIVESPEECH/livespeech-react/build
+          package: livespeech-react/build
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_ACE_ACADEMY_WEB }}
